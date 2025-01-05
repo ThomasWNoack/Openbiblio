@@ -40,7 +40,7 @@
 		<ul>
 			<li><a href="#releaseNotes">Erscheinungsbemerkungen</a></li>
 			<li><a href="#sysReq">Systemvoraussetzungen</a></li>
-			<li><a href="#install">OpenBiblio 0.8 Installationsanleitung
+			<li><a href="#install">OpenBiblio 0.8.1 Installationsanleitung
 					(Neues System)</a></li>
 			<li><a href="#userlogin">Einrichten des Userlogin</a></li>
 			<li><a href="#update">Update einer früheren Version</a></li>
@@ -48,7 +48,7 @@
 
 		<h1 id="releaseNotes">Erscheinungsbemerkungen</h1>
 		<p>
-			Version 0.8 wird für neue Installationen und zum updaten von älteren
+			Version 0.8.1 wird für neue Installationen und zum updaten von älteren
 			Openbiblio-Versionen empfohlen, da hiermit die Sicherheit verbessert
 			wird. Die wichtigsten Änderungen sind im <a href="ChangeLog">ChangeLog</a>
 			zu finden.
@@ -66,18 +66,12 @@
 				in der Ausleihe. Verbesserung der Sicherheit.</li>
 			<li>0.7.3.x: Update auf PHP 7.x möglich</li>
 			<li>0.8 und größer: Update auf das aktuelle und sicherere PHP
-				8.1/8.2 möglich (PHP bor 7.0 wird nicht mehr unterstützt!)</li>
-                        <li>0.8.1: Verbesserung der Sicherheit, v.a. in Bezug auf 
-                                Passwortverschlüselung</li>
+				8.x möglich (PHP vor 7.0 wird nicht mehr unterstützt!)</li>
+            <li>0.8.1: Verbesserung der Sicherheit, v.a. in Bezug auf Passwortverschlüselung</li>
 		</ul>
 		Bekannte Probleme:
 		<ul>
-			<li>MARC wird nicht perfekt in der Datenbank abgespeichert
-				(Problem 1, wird gefixed in obiblio-10-wip).</li>
-			<li>Wenn Sie bis ins Jahr 2038 noch nicht auf 64bit PHP
-				geupdatet haben kann es zu Problemen bei der Berechnung von den
-				Verspätungen, den entsprechenden Verspätungsgebühren und der
-				Berechnung der Reservierungsdauer kommen. (Problem 51).</li>
+			<li>MARC wird nicht perfekt in der Datenbank abgespeichert</li>
 		</ul>
 		<p>OpenBiblio Testläufe arbeiteten erfolgreich in den folgenden
 			Konfigurationen:</p>
@@ -326,7 +320,7 @@ mysql> <b>show databases;</b>
 				Texteditor ihrer Wahl. Ändern sie den Username und das Passwort auf
 				den neu erstellten MySQL-Benutzer und dessen Passwort (den sie im
 				vorigen Schritt erstellt haben).</li>
-                        <li id="step13">Bearbeiten sie die Datei global_constants.php
+            <li id="step13">Bearbeiten sie die Datei global_constants.php
 				(befindet sich im Verzeichnis shared von openbiblio) mit einem
 				Texteditor ihrer Wahl. Ändern sie folgende zwei Konstanten nach Ihrer Wahl:<br/>
                                 --> OBIB_UPGRADE_KEY<br />
@@ -353,7 +347,7 @@ mysql> <b>show databases;</b>
                                 Mitarbeiter hinzufügen können.</li>
                         <li>Unter admin --> Bibliothekseinstellung können systemreleavante Einstellungen vorgenommen werden, u.a. auch, ob die Bibliotheksnutzer
                                 per Online auf ihren persönlichen Account zugreifen dürfen oder nicht.</li>
-                        <li>Um den Mailversand für bspw. Passwort-Vergessen-Funktion oder Willkommensmeldung nützen
+                        <li>Um den Mailversand für bspw. Passwort-Vergessen-Funktion oder Willkommensmeldung nutzen
                                 zu können, müssen Sie als Administrator unter admin --> Mail-Nachrichten bei den jeweiligen 
                                 Nachrichten eine gültige E-Mail-Adresse als Absender hinterlegen. Diese kann sich bei den einzelnen 
                                 Nachrichten auch unterscheiden.</li>
@@ -414,9 +408,9 @@ mysql> <b>show databases;</b>
 			<li>Erstellen sie unbedingt ein Backup ihrer Datenbank. Lesen
 				Sie dazu die MySQL Dokumentation für eine Anleitung. (mysqldump
 				benutzen)</li>
-                        <li>Zum Updaten wird der Upgrade-Key benötigt, welcher unter der Konstante 
+            <li>Zum Updaten wird der Upgrade-Key benötigt, welcher unter der Konstante 
                                 OBIB_UPGRADE_KEY in der Datei ../shared/global_constants.php hinterlegt ist.</li>
-                        <li>Updaten Sie die OpenBiblio-Datenbank-Tabellen, indem Sie das
+            <li>Updaten Sie die OpenBiblio-Datenbank-Tabellen, indem Sie das
 				Konversions-Tool nutzen, welches sie unter <a
 				href="http://localhost/openbiblio/install/index.php">http://localhost/openbiblio/install/index.php</a>
 				finden, wobei ich davon ausgehe, daß sie das openbiblio-Verzeichniss
@@ -455,7 +449,7 @@ mysql> <b>show databases;</b>
                                 Bisherige Geheimwörter, welche in der DB-Tabelle memmber_fields hinterlegt waren, werden, verschlüsselt 
                                 in die DB-Tabelle member kopiert. Die nicht mehr benötigten Felder in member_fields und member_fields_dm 
                                 werden gelöscht.</li>
-                            <li>Passwörter für Benutzer werden nun standardmäüig in der DB-Tabelle member verschlüsselt hinterlegt.</li>
+                            <li>Passwörter für Benutzer werden nun standardmäßig in der DB-Tabelle member verschlüsselt hinterlegt.</li>
                             <li>Bei entsprechenden Fehlversuchen bei Login eine zeitliche Sperrung. Sowohl die Anzahl der 
                                 Fehlversuche, als auch der Zeitraum ist in einer bestimmten Spanne einstellbar.</li>
                             <li>Bei dem Upgrade auf 0.8.1 können die neuen Einstellungen beim Upgrade-Prozess gesetzt werden.</li>
