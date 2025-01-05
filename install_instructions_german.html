@@ -320,7 +320,7 @@ mysql> <b>show databases;</b>
 				Texteditor ihrer Wahl. Ändern sie den Username und das Passwort auf
 				den neu erstellten MySQL-Benutzer und dessen Passwort (den sie im
 				vorigen Schritt erstellt haben).</li>
-                        <li id="step13">Bearbeiten sie die Datei global_constants.php
+            <li id="step13">Bearbeiten sie die Datei global_constants.php
 				(befindet sich im Verzeichnis shared von openbiblio) mit einem
 				Texteditor ihrer Wahl. Ändern sie folgende zwei Konstanten nach Ihrer Wahl:<br/>
                                 --> OBIB_UPGRADE_KEY<br />
@@ -408,9 +408,9 @@ mysql> <b>show databases;</b>
 			<li>Erstellen sie unbedingt ein Backup ihrer Datenbank. Lesen
 				Sie dazu die MySQL Dokumentation für eine Anleitung. (mysqldump
 				benutzen)</li>
-                        <li>Zum Updaten wird der Upgrade-Key benötigt, welcher unter der Konstante 
+            <li>Zum Updaten wird der Upgrade-Key benötigt, welcher unter der Konstante 
                                 OBIB_UPGRADE_KEY in der Datei ../shared/global_constants.php hinterlegt ist.</li>
-                        <li>Updaten Sie die OpenBiblio-Datenbank-Tabellen, indem Sie das
+            <li>Updaten Sie die OpenBiblio-Datenbank-Tabellen, indem Sie das
 				Konversions-Tool nutzen, welches sie unter <a
 				href="http://localhost/openbiblio/install/index.php">http://localhost/openbiblio/install/index.php</a>
 				finden, wobei ich davon ausgehe, daß sie das openbiblio-Verzeichniss
@@ -449,7 +449,7 @@ mysql> <b>show databases;</b>
                                 Bisherige Geheimwörter, welche in der DB-Tabelle memmber_fields hinterlegt waren, werden, verschlüsselt 
                                 in die DB-Tabelle member kopiert. Die nicht mehr benötigten Felder in member_fields und member_fields_dm 
                                 werden gelöscht.</li>
-                            <li>Passwörter für Benutzer werden nun standardmäüig in der DB-Tabelle member verschlüsselt hinterlegt.</li>
+                            <li>Passwörter für Benutzer werden nun standardmäßig in der DB-Tabelle member verschlüsselt hinterlegt.</li>
                             <li>Bei entsprechenden Fehlversuchen bei Login eine zeitliche Sperrung. Sowohl die Anzahl der 
                                 Fehlversuche, als auch der Zeitraum ist in einer bestimmten Spanne einstellbar.</li>
                             <li>Bei dem Upgrade auf 0.8.1 können die neuen Einstellungen beim Upgrade-Prozess gesetzt werden.</li>
