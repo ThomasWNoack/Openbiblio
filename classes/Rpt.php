@@ -53,7 +53,6 @@ class Rpt {
           array_push($this->_code, $value);
           break;
         default:
-        //Changes PVD(8.0.x)
         (new Fatal)->internalError("Can't happen");
       }
     }

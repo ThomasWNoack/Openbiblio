@@ -19,11 +19,8 @@ require_once("../classes/Localize.php");
 
 class CircQuery extends Query 
 {
-    //Changes PVD(8.0.x)
     var $_loc;
-    //Changes PVD(8.0.x)
 	function __construct() {
-        	//Changes PVD(8.0.x)
 	        new Query;
         	$this->_loc = new Localize(OBIB_LOCALE, 'classes');
         }
@@ -34,10 +31,8 @@ class CircQuery extends Query
 		return $ret;
 	}
 	function _checkout_e($mbcode, $bcode, $due, $date, $force) {
-        //Changes PVD(8.0.x)
 		list($date, $err) = (new Date)->read_e('today');
 		if ($err)
-        //Changes PVD(8.0.x)
 			(new Fatal)->internalError("Unexpected date error: ".$err);
 		$earliest = $latest = time();
 		$mbrQ = new MemberQuery();
@@ -82,7 +77,6 @@ class CircQuery extends Query
 					return $err;
 				$copy = $copyQ->maybeGetByBarcode($bcode);
 				if (!$copy)
-                //Changes PVD(8.0.x)
 					(new Fatal)->internalError("Copy disappeared mysteriously.");
 			} else
 				return new ObibError($this->_loc->getText("Item %bcode% is already checked out to another member.",
@@ -107,12 +101,10 @@ class CircQuery extends Query
 		$copy->setMbrid($mbrid);
 		$copy->setStatusBeginDt($time);
 		if($due === NULL)
-        //Changes PVD(8.0.x)
 			$copy->setDueBackDt((new Date)->addDays($date, $days));
 		else
 			$copy->setDueBackDt($due);
 		if (!$copyQ->updateStatus($copy))
-        //Changes PVD(8.0.x)
 			(new Fatal)->InternalError("Impossible copyQ update error.");
 		
 		$hist = new BiblioStatusHist();
@@ -127,7 +119,6 @@ class CircQuery extends Query
 		$histQ->insert($hist);
 		if ($mbr->getMembershipEnd()!="0000-00-00") {
 			if($due === NULL)
-            //Changes PVD(8.0.x)
 				$back=(new Date)->addDays($date, $days);
 			else
 				$back=$due;

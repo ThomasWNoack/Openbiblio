@@ -11,7 +11,6 @@ require_once("../classes/DbOld.php");
 class Query
 {
     var $_link;
-    //Changes PVD(8.0.x)
     var $_conn;
     var $_error;
 
@@ -21,7 +20,6 @@ class Query
      * call connect_e() yourself.
      */
 
-    //Changes PVD(8.0.x)
     function __construct()
     {
         $e = $this->connect_e();
@@ -40,7 +38,6 @@ class Query
      */
     function _connect_e()
     {
-        //Changes PVD(8.0.x)
         $link = (new QueryAny)->db();
         if ($link->error_is()) {
             return array(NULL, $link->error_get());
@@ -52,7 +49,6 @@ class Query
     {
         $results = $this->_act($sql);
         if (!is_bool($results)) {
-            //Changes PVD(8.0.x)
             (new Fatal)->dbError($sql, "Action query returned results.", 'No DBMS error.');
         }
     }
@@ -60,7 +56,6 @@ class Query
     {
         $results = $this->_act($sql);
         if (is_bool($results)) {
-            //Changes PVD(8.0.x)
             (new Fatal)->dbError($sql, "Select did not return results.", 'No DBMS error.');
         }
         return new DbIter($results);
@@ -69,7 +64,6 @@ class Query
     {
         $r = $this->select($sql);
         if ($r->count() != 1) {
-            //Changes PVD(8.0.x)
             (new Fatal)->dbError(
                 $sql,
                 'Wrong number of result rows: expected 1, got ' . $r->count(),
@@ -85,7 +79,6 @@ class Query
         if ($r->count() == 0) {
             return NULL;
         } else if ($r->count() != 1) {
-            //Changes PVD(8.0.x)
             (new Fatal)->dbError(
                 $sql,
                 'Wrong number of result rows: expected 0 or 1, got ' . $r->count(),
@@ -98,13 +91,11 @@ class Query
     function _act($sql)
     {
         if (!$this->_link) {
-            //Changes PVD(8.0.x)
             $this->connect_e();
             // (new Fatal)->internalError('Tried to make database query before connection.');
         }
         $r = $this->_link->query($sql);
         if ($r === false) {
-            //Changes PVD(8.0.x)
             (new Fatal)->dbError($sql, 'Database query failed', $this->_link->my_error());
         }
         return $r;
@@ -130,13 +121,11 @@ class Query
      */
     function lock()
     {
-        //Changes PVD(8.0.x)
         //2 global constants defined here because they have not defined elsewhere
         if (!defined('OBIB_LOCK_NAME')){define('OBIB_LOCK_NAME', 'openbiblio_lock');}
         if (!defined('OBIB_LOCK_TIMEOUT')){define('OBIB_LOCK_TIMEOUT', '10');}
         global $_Query_lock_depth;
         if ($_Query_lock_depth < 0) {
-            //Changes PVD(8.0.x)
             (new Fatal)->internalError('Negative lock depth');
         }
         if ($_Query_lock_depth == 0) {
@@ -148,7 +137,6 @@ class Query
                 )
             );
             if (!isset($row['locked']) or $row['locked'] != 1) {
-                //Changes PVD(8.0.x)
                 (new Fatal)->cantLock();
             }
         }
@@ -158,7 +146,6 @@ class Query
     {
         global $_Query_lock_depth;
         if ($_Query_lock_depth <= 0) {
-            //Changes PVD(8.0.x)
             (new Fatal)->internalError('Tried to unlock an unlocked database.');
         }
         $_Query_lock_depth--;
@@ -206,7 +193,6 @@ class Query
     {
         $n = func_num_args();
         if ($n < 1) {
-            //Changes PVD(8.0.x)
             (new Fatal)->internalError('Not enough arguments given to mkSQL().');
         }
         $i = 1;
@@ -220,19 +206,15 @@ class Query
             }
             $SQL .= substr($fmt, 0, $p);
             if (strlen($fmt) < $p + 2) {
-                //Changes PVD(8.0.x)
                 (new Fatal)->internalError('Bad mkSQL() format string.');
             }
-            //Changes PVD(8.0.x)
             if ($fmt[$p + 1] == '%') {
                 $SQL .= "%";
             } else {
                 if ($i >= $n) {
-                    //Changes PVD(8.0.x)
                     (new Fatal)->internalError('Not enough arguments given to mkSQL().');
                 }
                 $arg = func_get_arg($i++);
-                //Changes PVD(8.0.x)
                 switch ($fmt[$p + 1]) {
                     case '!':
                         /* very dangerous, but sometimes very useful -- be careful */
@@ -262,27 +244,23 @@ class Query
                         $SQL .= $this->_numstr($arg);
                         break;
                     case 'Q':
-                        //Changes PVD(8.0.x)
                         //Adding this because connection link is empty
                         //on page BiblioSearchQuery query constructor is calling but it is not establiting the connection;
                         $this->connect_e();
                         $SQL .= "'" . $this->_link->real_escape_string($arg) . "'";
                         break;
                     case 'q':
-                        //Changes PVD(8.0.x)
                         //Adding this because connection link is empty
                         $this->connect_e();
                         $SQL .= $this->_link->real_escape_string($arg);
                         break;
                     default:
-                        //Changes PVD(8.0.x)
                         (new Fatal)->internalError('Bad mkSQL() format string.');
                 }
             }
             $fmt = substr($fmt, $p + 2);
         }
         if ($i != $n) {
-            //Changes PVD(8.0.x)
             (new Fatal)->internalError('Too many arguments to mkSQL().');
         }
         return $SQL;

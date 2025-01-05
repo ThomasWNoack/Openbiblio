@@ -8,7 +8,6 @@ class FieldError extends ObibError
 {
   /* public */
   var $field;
-  //Changes PVD(8.0.x)
   function __construct($field, $msg)
   {
     // parent::ObibError($msg);

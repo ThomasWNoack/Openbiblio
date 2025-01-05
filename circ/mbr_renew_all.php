@@ -24,7 +24,6 @@ $mbr = $mbrQ->get($mbrid);
 $circQ = new CircQuery;
 $biblioQ = new BiblioSearchQuery();
 if (!$biblioQ->doQuery(OBIB_STATUS_OUT, $mbrid))
-    //Changes PVD(8.0.x)
     (new Fatal)->dbError($biblioQ->getSQL(), 'doQuery failed', $biblioQ->getDbError());
 
 while ($biblio = $biblioQ->fetchRow()) {

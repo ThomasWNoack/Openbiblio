@@ -5,9 +5,7 @@
 
 class DbIter extends Iter
 {
-    //Changes PVD(8.0.x)
     var $results;
-    //Changes PVD(8.0.x)
     function __construct($results)
     {
         $this->results = $results;

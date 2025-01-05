@@ -28,17 +28,14 @@ class BiblioQuery extends Query
     var $_loc;
     var $_fieldsInBiblio;
 
-    //Changes PVD(8.0.x)
     function __construct()
     {
-        //Changes PVD(8.0.x)
         new Query();
         $this->_loc = new Localize(OBIB_LOCALE, "classes");
         $this->_fieldsInBiblio = array(
             '100a' => 'author',
             '245a' => 'title',
             '245b' => 'title_remainder',
-            //Changes PVD(8.0.x)
             '245c' => 'responsibility_stmt',
             '650a' => 'topic1',
             '650a1' => 'topic2',

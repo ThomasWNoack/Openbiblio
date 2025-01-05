@@ -55,7 +55,6 @@ class FatalHandler {
             foreach ($frame['args'] as $a) {
               array_push($args, var_export($a, true));
             }
-            //Changes PVD(8.0.x)
             echo H(implode(', ', $args));
           } else {
             echo '???';

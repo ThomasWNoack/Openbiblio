@@ -7,11 +7,9 @@
  */
 class DbOld
 {
-    //Changes PVD(8.0.x)
     private $results;
     private $id;
 
-    //Changes PVD(8.0.x)
     function __construct($results, $id)
     {
         $this->results = $results;
@@ -23,7 +21,6 @@ class DbOld
     }
     function numRows()
     {
-        //Changes PVD(8.0.x)
         $link = (new QueryAny)->db();
         return $link->num_rows($this->results);
     }
@@ -32,7 +29,6 @@ class DbOld
         if (is_bool($this->results)) {
             return false;
         }
-        //Changes PVD(8.0.x)
         $link = (new QueryAny)->db();
         switch ($arrayType) {
             case OBIB_NUM:
@@ -49,7 +45,6 @@ class DbOld
     }
     function resetResult()
     {
-        //Changes PVD(8.0.x)
         $link = (new QueryAny)->db();
         $link->data_seek($this->results, 0);
     }

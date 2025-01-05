@@ -78,7 +78,6 @@ if (OBIB_CHARSET != "") {
 </head>
 <body 
 	<?php
-// Changes PVD(8.0.x)
 // $focus_form_field This var is use but never declared before using in preg_match()
 // $focus_form_field = ""; //Removed because Focus doesn't working with this part
 

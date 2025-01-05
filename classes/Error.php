@@ -17,7 +17,6 @@
 class ObibError
 {
     var $msg;
-    //Changes PVD(8.0.x)
     function __construct($msg)
     {
         $this->msg = $msg;
