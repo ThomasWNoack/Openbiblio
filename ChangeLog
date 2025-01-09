@@ -1,5 +1,7 @@
 ---- 0.8.1 ----
 Folgende Änderungen wurden in der Version 0.8.1 umgesetzt:
+Danke diesmal an Michael Veit, der den größten Teil der neuen Funktionen programmiert hat, aber natürlich an alle anderen Mitwirkenden für Bugfixes, Ideen etc. :-)
+Thanks this time to Michael Veit, who programmed most of the new functions, but of course to all other contributors for bugfixes, ideas etc. :-)
 * Einstellung, ob Benutzer (member) einen Online-Zugriff auf ihr Konto haben oder nicht.
 * Passwörter für Benutzer sind Pflicht bei Online-Zugriff und müssen bestimmten Kriterien entsprechen.
 * Passworter von Benutzer und Bibliotheksmitarbeitenden werden per password_hash verschlüsselt.
@@ -13,6 +15,7 @@ Folgende Änderungen wurden in der Version 0.8.1 umgesetzt:
 * Beim Erstellen eines Bibliotheksmitglieds oder eines Mitarbeiters kann ausgewählt werden, ob das Kennwort manuell erstellt wird oder eine Mail an den neuen Nutzer gesendet wird, um ein eigenes Kennwort zu setzen. 
 * Bei dem Upgrade auf 0.8.1 können die neuen Einstellungen beim Upgrade-Prozess gesetzt werden.
 * Die Aktualisierungsseiten sind nun sprachlich angepasst.
+* Kleinere Fehler behoben
 --------
 The following changes have been implemented in version 0.8.1:
 * Setting whether users (members) have online access to their account or not.
@@ -28,6 +31,7 @@ The following changes have been implemented in version 0.8.1:
 * When creating a library member or a staff member, you can choose whether the password is created manually or a mail is sent to the new user to set their own password.
 * When upgrading to 0.8.1, the new settings can be set during the upgrade process.
 * The language of the update pages has been adapted.
+* minor bugs fixed
 
 ---- 0.8.0.1 ---- (Modifikationen/Modifications in openbiblio.de-Version)
 * Bugfixes
