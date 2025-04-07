@@ -127,6 +127,6 @@ $trans["mbrPrintCloseWindow"]     = "\$text='Close Window';";
 #****************************************************************************
 $trans["placeHoldErr2"]           = "\$text='Barcode does not exist.';";
 $trans["placeHoldErr3"]           = "\$text='This member already has that item checked out -- not placing hold.';";
-$trans["This item is not checked out or on hold."]           = "\$text='This item is not checked out or on hold.';";
+$trans["placeHoldErr4"]           = "\$text='This item is already checked out or on hold.';";
 
 ?>
