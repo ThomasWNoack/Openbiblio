@@ -14,7 +14,6 @@
   
   require_once("../functions/inputFuncs.php");
   require_once("../opac/logincheck.php");
-  require_once("../shared/header_opac.php");
   require_once("../classes/Localize.php");
   $loc = new Localize(OBIB_LOCALE,'shared');
   
@@ -41,7 +40,9 @@
   $mbrQ->connect_e();
   $mbr = $mbrQ->get($mbrid);
   $mbrQ->close();
-  
+
+  require_once("../shared/header_opac.php");
+
   $cancelLocation = "../opac/mbr_account.php?mbrid=$mbr->_mbrid";
 ?>
 

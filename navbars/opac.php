@@ -52,7 +52,7 @@ if (OBIB_MBR_ACCOUNT_ONLINE == TRUE) {
 <?php 
             echo '<p class="loginName">' . $sess_mbrFirstName . ' ' . $sess_mbrLastName . '</p>';
       } else if ($nav == "userlogin") {
-            echo '&raquo; ' . $navLoc->getText("userlogin");;
+            echo '&raquo; ' . $navLoc->getText("userlogin") . '<br />';
       } else if ($sess_userid > NULL ) { ?>
             <input type="button" onClick="self.location='../shared/logout.php'" value="<?php echo $navLoc->getText("logout");?>" class="navbutton">
       <?php echo '<p class="loginName"><span class="underline">' .$navLoc->getText("staff") . '</span><br />';
@@ -61,19 +61,38 @@ if (OBIB_MBR_ACCOUNT_ONLINE == TRUE) {
             <input type="button" onClick="self.location='../opac/loginform.php'" value="<?php echo $navLoc->getText("userlogin");?>" class="navbutton">
             <br /><br />    
 <?php } 
- 
-    if ($nav == "memberaccount") {
-        echo '&raquo; ' . $navLoc->getText("memberaccount") . '<br>';
-        if (OBIB_MBR_ACCOUNT_ONLINE == TRUE) {
+    if ($nav == "pwdforget") {
+        echo '&raquo; ' . $navLoc->getText("PwdNewSet") . '<br>';
+    }
+
+    if ($sess_mbrid > 0) {
+        if ($nav == "memberaccount") {
+            echo '&raquo; ' . $navLoc->getText("memberaccount") . '<br>';
+        } else {
+            echo '<a href="../opac/mbr_account.php?mbrid=' . $sess_mbrid;
+            if (isset($lookup) == 'Y') {
+                echo '&lookup=Y';
+            }
+            echo '" class="alt1">' . $navLoc->getText("memberaccount") . '</a><br>';
+        }
+        if ($nav == "memberaccount" || $nav == "PwdReset" || $nav == "PwdCreate") {
             if ($mbr->getPwd() == "") {
-                echo '&nbsp; &nbsp;<a href="../opac/mbr_pwd_reset_form.php?mbrid=' . $sess_mbrid
+                if ($nav == "PwdCreate") {
+                    echo '&nbsp; &nbsp; &raquo;' . $navLoc->getText("PwdCreate") . '<br>';
+                } else {
+                    echo '&nbsp; &nbsp;<a href="../opac/mbr_pwd_reset_form.php?mbrid=' . $sess_mbrid
                         . '" class="alt1">' . $navLoc->getText("PwdCreate") . '</a><br>';
+                }
             } else {
-                echo '&nbsp; &nbsp; <a href="../opac/mbr_pwd_reset_form.php?mbrid=' . $sess_mbrid 
+                if ($nav == "PwdReset") {
+                    echo '&nbsp; &nbsp; &raquo;' . $navLoc->getText("PwdReset") . '<br>';
+                } else {
+                    echo '&nbsp; &nbsp; <a href="../opac/mbr_pwd_reset_form.php?mbrid=' . $sess_mbrid 
                         . '" class="alt1">' . $navLoc->getText("PwdReset") . '</a><br>';
+                }
             }
         }
-    } 
+    }
 
     if (isset($sess_mbrid) && !$sess_mbrid == "" && ($nav != "memberaccount") && (!$nav == "pwdforget")) { 
         echo '<a href="../opac/mbr_account.php?mbrid=' . $sess_mbrid;
@@ -99,9 +118,7 @@ if ($nav == "search") {
 if ($nav == "view") {
     echo '&raquo; ' . $navLoc->getText("catalogBibInfo") . '<br>';
 }
-if ($nav == "pwdforget") {
-    echo '&raquo; ' . $navLoc->getText("PwdNewSet") . '<br>';
-}
+
 ?>
 
 <a href="javascript:popSecondary('../shared/help.php<?php if (isset($helpPage)) echo "?page=".H(addslashes(U($helpPage))); ?>')"><?php echo $navLoc->getText("Help"); ?></a>
