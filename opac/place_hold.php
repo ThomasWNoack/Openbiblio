@@ -53,8 +53,8 @@
     $_SESSION["pageErrors"] = $pageErrors;
     header("Location: ../opac/mbr_account.php?mbrid=".U($mbrid));
     exit();
-  } else if ($copy->getStatusCd() != OBIB_STATUS_OUT && $copy->getStatusCd() != OBIB_STATUS_ON_HOLD) {
-    $pageErrors["holdBarcodeNmbr"] = $loc->getText("This item is not checked out or on hold.");
+  } else if ($copy->getStatusCd() == OBIB_STATUS_OUT || $copy->getStatusCd() == OBIB_STATUS_ON_HOLD) {
+    $pageErrors["holdBarcodeNmbr"] = $loc->getText("placeHoldErr4");
     $postVars["holdBarcodeNmbr"] = $barcode;
     $_SESSION["postVars"] = $postVars;
     $_SESSION["pageErrors"] = $pageErrors;

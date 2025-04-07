@@ -232,7 +232,7 @@ $trans["holdMessageMsg2"] = "\$text='Kehre zur Medienrückgabe zurück.';";
 $trans["placeHoldErr1"] = "\$text='Die Mediennummer darf nur aus Zahlen und Buchstaben bestehen.';";
 $trans["placeHoldErr2"] = "\$text='Die Mediennummer exitiert nicht.';";
 $trans["placeHoldErr3"] = "\$text='Das Mitglied hat dieses Medium bereits ausgeliehen - keine Vorbestellung angelegt.';";
-$trans["This item is not checked out or on hold."] = "\$text='Dieses Exemplar ist weder vorbestellt noch ausgeliehen.';";
+$trans["placeHoldErr4"] = "\$text='Dieses Exemplar ist entweder bereits vorbestellt oder ausgeliehen.';";
 
 # ****************************************************************************
 # * Translation text for page mbr_del_confirm.php
