@@ -173,10 +173,10 @@ if($mbr->getTypeOfPwdCreation() == 1 && (!$mbr->getMbrid() == NULL)) {
 unset($_SESSION["postVars"]);
 unset($_SESSION["pageErrors"]);
 
-if ($error != NULL) {
+if (isset($error)) {
     $msg = $error . ' ' . $notice;
 } else {
-    $msg = $loc->getText("mbrNewSuccess") . ' ' . $notice;
+    $msg = $loc->getText("mbrNewSuccess") . ' ' . (isset($notice)?$notice:'');
 }
 header("Location: ../circ/mbr_view.php?mbrid=" . U($mbr->getMbrid()) . "&reset=Y&msg=" . U($msg));
 exit();
