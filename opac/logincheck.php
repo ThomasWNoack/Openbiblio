@@ -39,7 +39,7 @@ if (! OBIB_DEMO_FLG) {
         header("Location: ../opac/loginform.php");
         exit();
     }
-    if (($_SESSION["mbrid"] != $_GET["mbrid"]) and ($_SESSION["mbrid"] != trim($_POST["mbrid"]))) {
+    if (($_SESSION["mbrid"] != @$_GET["mbrid"]) and ($_SESSION["mbrid"] != trim(@$_POST["mbrid"]))) {
         header("Location: ../opac/loginform.php");
         exit();
     }

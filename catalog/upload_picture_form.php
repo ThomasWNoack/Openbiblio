@@ -7,6 +7,16 @@
   $tab = "cataloging";
   $nav = "upload_picture";
 
+  #****************************************************************************
+  #*  Retrieving get var
+  #****************************************************************************
+  $bibid = $_GET["bibid"];
+  if (isset($_GET["msg"])) {
+    $msg = "<font class=\"error\">".H($_GET["msg"])."</font><br><br>";
+  } else {
+    $msg = "";
+  }
+
   include("../shared/logincheck.php");
   include("../shared/header.php");
 
@@ -18,16 +28,6 @@
   require_once("../functions/inputFuncs.php");
   require_once("../classes/Localize.php");
   $loc = new Localize(OBIB_LOCALE,$tab);
-
-  #****************************************************************************
-  #*  Retrieving get var
-  #****************************************************************************
-  $bibid = $_GET["bibid"];
-  if (isset($_GET["msg"])) {
-    $msg = "<font class=\"error\">".H($_GET["msg"])."</font><br><br>";
-  } else {
-    $msg = "";
-  }
   
   #****************************************************************************
   #*  Search database

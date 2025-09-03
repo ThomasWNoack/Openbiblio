@@ -155,6 +155,7 @@ $trans["admin_materials_listDel"]                   = "\$text = 'del';";
 $trans["admin_materials_listNote"]                  = "\$text = '*Note:';";
 $trans["admin_materials_listNoteText"]              = "\$text = 'The delete function is only available on material types that have a bibliography count of zero.  If you wish to delete a material type with a bibliography count greater than zero you will first need to change the material type on those bibliographies to another material type.';";
 $trans["No fields found!"]                          = "\$text = 'No fields found!';";
+$trans["admin_materials_listAddCustomMARCField"]    = "\$text = 'Add a custom MARC Field to this material type';";
 
 #****************************************************************************
 #*  Translation text for page materials_new.php

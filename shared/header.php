@@ -11,27 +11,18 @@ if (preg_match('/[^a-zA-Z0-9_]/', $tab)) {
 include ("../shared/header_top.php");
 ?>
 
+<!-- Site wrapper -->
+<div class="wrapper">
+  <!-- Navbar -->
+  <?php include('navbar.php'); ?>
+  <!-- /.navbar -->
 
-<!-- **************************************************************************************
-     * Left nav
-     **************************************************************************************-->
-<table
-	style="height: 100%; width: 100%; border: none; border-spacing: 0px">
-	<tr bgcolor="<?php echo H(OBIB_ALT1_BG); ?>">
-		<td colspan="6"><img src="../images/shim.gif" width="1" height="15"
-			border="0"></td>
-	</tr>
-	<tr>
-            <td class="navigationLeft" valign="top" bgcolor="<?php echo H(OBIB_ALT1_BG); ?>">
-                <font class="alt1">
-                    <?php include("../navbars/" . $tab . ".php"); ?>
-                </font> <br>
-		<br>
-		<br>
-		<br></td>
-		<td bgcolor="<?php echo H(OBIB_BORDER_COLOR); ?>"><img
-			src="../images/shim.gif" width="0" height="1" border="0"></td>
-		<td class="ContentBody" height="100%" width="100%" valign="top"><font class="primary"> <br>
-     <!-- **************************************************************************************
-     * beginning of main body
-     **************************************************************************************-->
+  <!-- Main Sidebar Container -->
+  <?php include('sidebar.php'); ?>
+ 
+ 
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+
+    <!-- Main content -->
+    <section class="content">

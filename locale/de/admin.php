@@ -154,6 +154,7 @@ $trans["admin_materials_listDel"]                    = "\$text = 'Lösche';";
 $trans["admin_materials_listNote"]                   = "\$text = '*Bemerkung:';";
 $trans["admin_materials_listNoteText"]               = "\$text = 'Man kann nur Medienarten löschen, die keine Medien enthalten.<br>Wenn Sie eine Medienart löschen möchten, welche Medien enthält, müssen sie diese Medien zuerst einer anderen Medienart zuordnen.';";
 $trans["No fields found!"]                           = "\$text = 'Keine Felder gefunden!';";
+$trans["admin_materials_listAddCustomMARCField"]     = "\$text = 'Füge dieser Medienart ein benutzerdefiniertes MARC-Feld hinzu';";
 
 #****************************************************************************
 #*  Translation text for page materials_new.php

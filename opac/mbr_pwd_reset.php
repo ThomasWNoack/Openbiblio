@@ -68,7 +68,7 @@
   #**************************************************************************
   #*  Show success page
   #**************************************************************************
-  require_once("../shared/header.php");
+  require_once("../shared/header_opac.php");
 
   echo $loc->getText("PwdResetSuccessfully");?>
   <br><br>
