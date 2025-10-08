@@ -49,7 +49,7 @@ if (OBIB_CHARSET != "") {
     $LibraryName = str_replace('<br />', " ", OBIB_LIBRARY_NAME);
     $LibraryName = str_replace('<br />', " ", $LibraryName);
     $LibraryName = strip_tags($LibraryName);
-    echo substr($LibraryName, 0, 20);
+    echo $LibraryName;
     ?>
     </title>
     <?php // MV add favicon ?>
