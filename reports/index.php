@@ -23,7 +23,6 @@
   if ($handle = opendir(REPORT_DEFS_DIR)) {
     while (($file = readdir($handle)) !== false) { 
       if (preg_match('/^([^._][^.]*)\\.(rpt|php)$/', $file, $m)) {
-        //Changes PVD(8.0.x)
         list($rpt, $err) = (new Report)->create_e($m[1]);
         if (!$err) {
           if (!isset($reports[$rpt->category()])) {

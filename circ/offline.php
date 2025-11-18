@@ -27,13 +27,11 @@ function run_batch($lines, $date)
         $command = trim(array_shift($lines));
         if ($command == '')
             continue;
-        // Changes PVD(8.0.x)
         if ($command[0] != '%')
             return array(
                 $loc->getText("Bad upload file: Expected a command code, but didn't get one")
             );
         $args = array();
-        // Changes PVD(8.0.x)
         while (isset($lines[0]) and $lines[0][0] != '%')
             $args[] = trim(array_shift($lines));
         switch ($command) {
@@ -98,7 +96,6 @@ $form = array(
         )
     )
 );
-// Changes PVD(8.0.x)
 list ($values, $errs) = (new Form())->getCgi_el($form['fields']);
 if (! $values['_posted'] or $errs) {
     include_once ("../shared/header.php");
@@ -107,7 +104,6 @@ if (! $values['_posted'] or $errs) {
     }
     $form['values'] = $values;
     $form['errors'] = $errs;
-    // Changes PVD(8.0.x)
     (new Form())->display($form);
     layout_links();
     include_once ("../shared/footer.php");
@@ -135,7 +131,6 @@ if ($errors) {
         echo '<li>' . H($e) . '</li>';
     }
     echo '</ul></div>';
-    // Changes PVD(8.0.x)
     (new Form())->display($form);
     layout_links();
     include_once ("../shared/footer.php");

@@ -15,6 +15,13 @@ if (isset($_GET["msg"])) {
 } else {
     $msg = "";
 }
+
+if (isset($_GET["materialCd"]) && $_GET["materialCd"] != "") {
+    $materialCd = $_GET["materialCd"];
+} else {
+    (new Fatal())->internalError('materialCd not set');
+}
+
 require_once ("../functions/inputFuncs.php");
 require_once ("../shared/logincheck.php");
 require_once ("../classes/MaterialFieldQuery.php");
@@ -23,20 +30,12 @@ require_once ("../shared/header.php");
 require_once ("../classes/Localize.php");
 $loc = new Localize(OBIB_LOCALE, $tab);
 require_once ("../functions/errorFuncs.php");
-
-if (isset($_GET["materialCd"]) && $_GET["materialCd"] != "") {
-    $materialCd = $_GET["materialCd"];
-} else {
-    (new Fatal())->internalError('materialCd not set');
-}
-
 // Played with printselect function
 $postvars["materialCd"] = $materialCd;
 // $value=$_GET["materialCd"];
 $fieldname = "materialCd";
 $domainTable = "material_type_dm";
 $dmQ = new DmQuery();
-// Changes PVD(8.0.x)
 $dmQ->connect_e();
 $dm = $dmQ->get1("material_type_dm", $materialCd);
 $material_type = $dm->getDescription();
@@ -45,16 +44,14 @@ $dmQ->close();
 echo $msg;
 ?>
 <br>
-<a
-	href="custom_marc_add_form.php?materialCd=<?php echo HURL($materialCd); ?>&amp;reset=Y">Add
-	a custom MARC Field to this material type</a>
-(
-<?php echo H($dm->getDescription()); ?>)
+<a href="custom_marc_add_form.php?materialCd=<?php echo HURL($materialCd); ?>&amp;reset=Y">
+   <?php echo $loc->getText("admin_materials_listAddCustomMARCField"); ?>
+</a>
+(<?php echo H($dm->getDescription()); ?>)
 <br>
 <br>
 <?php
 $matQ = new MaterialFieldQuery();
-// Changes PVD(8.0.x)
 $matQ->connect_e();
 $rows = $matQ->get($materialCd);
 $matQ->close();

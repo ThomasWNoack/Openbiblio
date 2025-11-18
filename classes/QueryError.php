@@ -6,7 +6,6 @@
 class QueryError extends QueryBase
   {
   protected $type = 'error';
-  //Changes PVD(8.0.x)
   function __construct()
     {
     $this->error = new DbError("Checking for MySQL Extension...",

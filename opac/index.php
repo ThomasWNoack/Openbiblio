@@ -126,7 +126,6 @@ require_once ("../shared/header_opac.php");
 
                     <?php
                     $dmQ = new DmQuery();
-                    // Changes PVD(8.0.x)
                     $dmQ->connect_e();
                     $dms = $dmQ->get("collection_dm");
                     $dmQ->close();
@@ -143,7 +142,6 @@ require_once ("../shared/header_opac.php");
 
                     <?php
                     $dmQ = new DmQuery();
-                    // Changes PVD(8.0.x)
                     $dmQ->connect_e();
                     $dms = $dmQ->get("material_type_dm");
                     $dmQ->close();

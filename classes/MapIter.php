@@ -1,6 +1,5 @@
 <?php
 class MapIter extends Iter {
-    //Changes PVD(8.0.x)
   function __construct($callback, $iter) {
     $this->callback = $callback;
     $this->iter = $iter;

@@ -319,7 +319,6 @@ class StaffQuery extends Query {
     $sql = $this->mkSQL("SELECT * FROM staff WHERE %q = %Q ", $db_column, $value);
     $rows = $this->exec($sql);
     if (count($rows) == 0) {
-        //Changes PVD(8.0.x)
         return false;
     }           
     return $this->_skObj($rows[0]);
@@ -331,7 +330,6 @@ class StaffQuery extends Query {
             $db_column_username, $username);
     $rows = $this->exec($sql);
     if (count($rows) == 0) {
-        //Changes PVD(8.0.x)
         return false;
     }
     return $this->_skObj($rows[0]);

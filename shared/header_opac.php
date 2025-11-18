@@ -5,6 +5,10 @@
  
   require_once("../classes/Localize.php");
   $headerLoc = new Localize(OBIB_LOCALE,"shared");
+  $navLoc = new Localize(OBIB_LOCALE,"navbars"); 
+
+// Is necessary to use TinyMCE
+echo "<!DOCTYPE html>";
 
 // code html tag with language attribute if specified.
 echo "<html";
@@ -18,34 +22,79 @@ if (OBIB_CHARSET != "") { ?>
 <META http-equiv="content-type" content="text/html; charset=<?php echo H(OBIB_CHARSET); ?>">
 <?php } ?>
 
-<style type="text/css">
-  <?php include("../css/style.php");?>
-</style>
-<meta name="description" content="OpenBiblio Library Automation System">
-<title><?php echo H(OBIB_LIBRARY_NAME);?></title>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<!-- Google Font: Source Sans Pro -->
+	<!--<link rel="stylesheet" href="lib/fonts/SourceSansPro.css">-->
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="../lib/AdminLTE/plugins/fontawesome-free/css/all.min.css">
+	<!-- DataTables -->
+	<link rel="stylesheet" href="../lib/AdminLTE/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+	<link rel="stylesheet" href="../lib/AdminLTE/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+	<link rel="stylesheet" href="../lib/AdminLTE/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+	<!-- Theme style -->
+	<link rel="stylesheet" href="../lib/AdminLTE/dist/css/adminlte.min.css">
+	<!--
+	<link rel='stylesheet' href='//netdna.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
+	<link rel='stylesheet' href='//netdna.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css'>
+	-->
+    <?php 
+    // Include TinyMCE if page email_messages_edit_form.php
+    if (isset($focus_form_name) && $focus_form_name == 'editMessagesForm') { ?>
+        <script src="../lib/vendor/tinymce/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
+        <script>
+          tinymce.init({
+            selector: '#tinymce',
+            license_key: 'gpl'
+          });
+        </script>
+    <?php } ?> 
+    
+    <style type="text/css">
+        <?php include("../css/style.php");?>
+        body.sidebar-mini:not(.layout-fixed) .main-sidebar {
+            height: 100vh !important;
+        }
+    </style>
 
-<script>
-<!--
-function popSecondary(url) {
-    var SecondaryWin;
-    SecondaryWin = window.open(url,"secondary","resizable=yes,scrollbars=yes,width=535,height=400");
-}
-function popSecondaryLarge(url) {
-    var SecondaryWin;
-    SecondaryWin = window.open(url,"secondary","toolbar=yes,resizable=yes,scrollbars=yes,width=700,height=500");
-    self.name="main";
-}
-function returnLookup(formName,fieldName,val) {
-    window.opener.document.forms[formName].elements[fieldName].value=val;
-    window.opener.focus();
-    this.close();
-}
--->
-</script>
+
+    <meta name="description" content="OpenBiblio Library Automation System">
+    <title><?php  
+    $LibraryName = str_replace('<br />', " ", OBIB_LIBRARY_NAME);
+    $LibraryName = str_replace('<br />', " ", $LibraryName);
+    $LibraryName = strip_tags($LibraryName);
+    // echo substr($LibraryName, 0, 20);
+    echo $LibraryName;
+    ?>
+    </title>
+
+    <link rel="shortcut icon" href="../images/favicon.ico"/>
+
+    <script>
+    <!--
+    function popSecondary(url) {
+        var SecondaryWin;
+        SecondaryWin = window.open(url,"secondary","resizable=yes,scrollbars=yes,width=535,height=400");
+    }
+    function popSecondaryLarge(url) {
+        var SecondaryWin;
+        SecondaryWin = window.open(url,"secondary","toolbar=yes,resizable=yes,scrollbars=yes,width=700,height=500");
+        self.name="main";
+    }
+    function returnLookup(formName,fieldName,val) {
+        window.opener.document.forms[formName].elements[fieldName].value=val;
+        window.opener.focus();
+        this.close();
+    }
+    -->
+    </script>
 
 
 </head>
-<body bgcolor="<?php echo H(OBIB_PRIMARY_BG);?>" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" marginheight="0" marginwidth="0" <?php
+<body class="hold-transition sidebar-mini" 
+  <?php
   if (isset($focus_form_name) && ($focus_form_name != "")) {
     if (preg_match('/^[a-zA-Z0-9_]+$/', $focus_form_name)
         && preg_match('/^[a-zA-Z0-9_]+$/', $focus_form_field)) {
@@ -53,74 +102,18 @@ function returnLookup(formName,fieldName,val) {
     }
   } ?> >
 
+<!-- Site wrapper -->
+<div class="wrapper">
+  <!-- Navbar -->
+  <?php include('navbar_opac.php'); ?>
+  <!-- /.navbar -->
 
-<!-- **************************************************************************************
-     * Library Name and hours
-     **************************************************************************************-->
-<table class="primary" style="width:100%;border:none;border-spacing:0px">
-  <tr style="padding:0px" bgcolor="<?php echo H(OBIB_TITLE_BG);?>">
-    <td style="padding:0px" width="100%" class="title" valign="top">
-       <?php
-         if (OBIB_LIBRARY_IMAGE_URL != "") {
-           echo "<img align=\"middle\" src=\"".H(OBIB_LIBRARY_IMAGE_URL)."\" border=\"0\">";
-         }
-         if (!OBIB_LIBRARY_USE_IMAGE_ONLY) {
-           echo " ".H(OBIB_LIBRARY_NAME);
-         }
-       ?>
-    </td>
-    <td valign="top">
-      <table class="primary" style="border:none;border-spacing:0px">
-        <tr>
-          <td style="padding:0px;white-space:nowrap" class="title"><font class="small"><?php echo $headerLoc->getText("headerTodaysDate"); ?></font></td>
-          <td style="padding:0px;white-space:nowrap" class="title"><font class="small"><?php echo H(date($headerLoc->getText("headerDateFormat")));?></font></td>
-        </tr>
-        <tr>
-          <td style="padding:0px;white-space:nowrap" class="title"><font class="small"><?php if (OBIB_LIBRARY_HOURS != "") echo $headerLoc->getText("headerLibraryHours");?></font></td>
-          <td style="padding:0px;white-space:nowrap" class="title"><font class="small"><?php if (OBIB_LIBRARY_HOURS != "") echo H(OBIB_LIBRARY_HOURS);?></font></td>
-        </tr>
-        <tr>
-          <td style="padding:0px;white-space:nowrap" class="title"><font class="small"><?php if (OBIB_LIBRARY_PHONE != "") echo $headerLoc->getText("headerLibraryPhone");?></font></td>
-          <td style="padding:0px;white-space:nowrap" class="title"><font class="small"><?php if (OBIB_LIBRARY_PHONE != "") echo H(OBIB_LIBRARY_PHONE);?></font></td>
-        </tr>
-      </table>
-    </td>
-  </tr>
-</table>
-<!-- **************************************************************************************
-     * Tabs
-     **************************************************************************************-->
-<table class="primary" style="width:100%;border:none;border-spacing:0px">
-  <tr>
-    <td style="padding:0px" bgcolor="<?php echo H(OBIB_BORDER_COLOR);?>"><img src="../images/shim.gif" width="1" height="1" border="0"></td>
-  </tr>
-</table>
-<!-- **************************************************************************************
-     * Left nav
-     **************************************************************************************-->
-<table style="height:100%;width:100%;border:none;border-spacing:0px">
-  <tr bgcolor="<?php echo H(OBIB_ALT1_BG);?>">
-    <td style="padding:0px" colspan="6"><img src="../images/shim.gif" width="1" height="15" border="0"></td>
-  </tr>
-  <tr>
-    <td style="padding:0px" bgcolor="<?php echo H(OBIB_ALT1_BG);?>"><img src="../images/shim.gif" width="10" height="1" border="0"></td>
-    <td style="padding:0px" bgcolor="<?php echo H(OBIB_ALT1_BG);?>"><img src="../images/shim.gif" width="140" height="1" border="0"></td>
-    <td style="padding:0px" bgcolor="<?php echo H(OBIB_BORDER_COLOR);?>"><img src="../images/shim.gif" width="1" height="1" border="0"></td>
-    <td style="padding:0px" bgcolor="<?php echo H(OBIB_BORDER_COLOR);?>"><img src="../images/shim.gif" width="10" height="1" border="0"></td>
-    <td style="padding:0px" bgcolor="<?php echo H(OBIB_BORDER_COLOR);?>"><img src="../images/shim.gif" width="1" height="1" border="0"></td>
-    <td style="padding:0px" bgcolor="<?php echo H(OBIB_BORDER_COLOR);?>"><img src="../images/shim.gif" width="10" height="1" border="0"></td>
-  </tr>
-  <tr>
-    <td style="padding:0px" bgcolor="<?php echo H(OBIB_ALT1_BG);?>"><img src="../images/shim.gif" width="1" height="1" border="0"></td>
-    <td style="padding:0px" valign="top" bgcolor="<?php echo H(OBIB_ALT1_BG);?>">
-      <font  class="alt1">
-      <?php include("../navbars/opac.php"); ?>
-      </font>
-    <br><br><br><br>
-    </td>
-    <td style="padding:0px" bgcolor="<?php echo H(OBIB_BORDER_COLOR);?>"><img src="../images/shim.gif" width="1" height="1" border="0"></td>
-    <td style="padding:0px" bgcolor="<?php echo H(OBIB_PRIMARY_BG);?>"><img src="../images/shim.gif" width="1" height="1" border="0"></td>
-    <td style="padding:0px" height="100%" width="100%" valign="top">
-      <font class="primary"> <br> <!-- **************************************************************************************
-     * beginning of main body
-     **************************************************************************************-->
+  <!-- Main Sidebar Container -->
+  <?php include('sidebar_opac.php'); ?>
+ 
+ 
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+
+    <!-- Main content -->
+    <section class="content">

@@ -28,10 +28,8 @@ class BiblioSearchQuery extends Query
     var $_pageCount = 0;
     var $_loc;
 
-    //Changes PVD(8.0.x)
     function __construct()
     {
-        //Changes PVD(8.0.x)
         new Query;
         $this->_loc = new Localize(OBIB_LOCALE, "classes");
     }
@@ -260,7 +258,6 @@ class BiblioSearchQuery extends Query
         }
 
         # Calculate stats based on row count
-        //Changes PVD(8.0.x)
         $link = (new QueryAny)->db();
         $this->_rowCount = implode($link->fetch_row($link->query('select found_rows();')));
         $this->_pageCount = ceil($this->_rowCount / $this->_itemsPerPage);
@@ -444,7 +441,6 @@ class BiblioSearchQuery extends Query
         }
         # get Picture
         $biblioQ = new BiblioQuery();
-        // Changes PVD(8.0.x)
         $biblioQ->connect_e();
         if ($biblioQ->errorOccurred()) {
             $biblioQ->close();

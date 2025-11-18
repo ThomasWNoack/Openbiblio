@@ -19,10 +19,8 @@ class UsmarcTagDmQuery extends Query
 {
     var $_loc;
 
-    //Changes PVD(8.0.x)
     function __construct()
     {
-        //Changes PVD(8.0.x)
         new Query();
         $this->_loc = new Localize(OBIB_LOCALE, "classes");
     }

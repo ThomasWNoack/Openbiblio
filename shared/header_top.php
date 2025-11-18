@@ -5,6 +5,7 @@
  */
 require_once ("../classes/Localize.php");
 $headerLoc = new Localize(OBIB_LOCALE, "shared");
+$navLoc = new Localize(OBIB_LOCALE,"navbars"); 
 
 // code character set in HTTP header if specified
 if (OBIB_CHARSET != "") {
@@ -28,7 +29,23 @@ if (OBIB_CHARSET != "") {
 <?php } ?>
 
 <head>
-
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<!-- Google Font: Source Sans Pro -->
+	<!--<link rel="stylesheet" href="lib/fonts/SourceSansPro.css">-->
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="../lib/AdminLTE/plugins/fontawesome-free/css/all.min.css">
+	<!-- DataTables -->
+	<link rel="stylesheet" href="../lib/AdminLTE/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+	<link rel="stylesheet" href="../lib/AdminLTE/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+	<link rel="stylesheet" href="../lib/AdminLTE/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+	<!-- Theme style -->
+	<link rel="stylesheet" href="../lib/AdminLTE/dist/css/adminlte.min.css">
+	<!--
+	<link rel='stylesheet' href='//netdna.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
+	<link rel='stylesheet' href='//netdna.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css'>
+	-->
     <?php 
     // Include TinyMCE if page email_messages_edit_form.php
     if (isset($focus_form_name) && $focus_form_name == 'editMessagesForm') { ?>
@@ -43,13 +60,17 @@ if (OBIB_CHARSET != "") {
     
     <style type="text/css">
         <?php include("../css/style.php");?>
+        body.sidebar-mini:not(.layout-fixed) .main-sidebar {
+            height: 100vh !important;
+        }
     </style>
     <meta name="description" content="OpenBiblio Library Automation System">
     <title><?php  
     $LibraryName = str_replace('<br />', " ", OBIB_LIBRARY_NAME);
     $LibraryName = str_replace('<br />', " ", $LibraryName);
     $LibraryName = strip_tags($LibraryName);
-    echo substr($LibraryName, 0, 20);
+    // echo substr($LibraryName, 0, 20);
+    echo $LibraryName;
     ?>
     </title>
     <?php // MV add favicon ?>
@@ -74,11 +95,10 @@ if (OBIB_CHARSET != "") {
         this.close();
     }
     -->
-    </script>  
+    </script>
 </head>
-<body 
+<body class="hold-transition sidebar-mini" 
 	<?php
-// Changes PVD(8.0.x)
 // $focus_form_field This var is use but never declared before using in preg_match()
 // $focus_form_field = ""; //Removed because Focus doesn't working with this part
 
@@ -88,80 +108,3 @@ if (isset($focus_form_name) && ($focus_form_name != "")) {
     }
 }
 ?>>
-
-    <!-- **************************************************************************************
-     * Library Name and hours
-     **************************************************************************************-->
-	<div class="headertop">
-            <div class="headertop1">
-                <div class="primary headerBiblioInfo">
-                        <div class=" title headerBiblioSingleInfo">
-                            <font class="small"><?php echo $headerLoc->getText("headerTodaysDate") . " " .
-                                H(date($headerLoc->getText("headerDateFormat")));?></font>
-                        </div>
-                        <div class=" title headerBiblioSingleInfo">
-                            <font class="small"><?php if (OBIB_LIBRARY_HOURS != "") echo $headerLoc->getText("headerLibraryHours") . " ";
-                                 if (OBIB_LIBRARY_HOURS != "") echo H(OBIB_LIBRARY_HOURS);?></font>
-                        </div>
-                        <div class=" title headerBiblioSingleInfo">
-                            <font class="small"><?php if (OBIB_LIBRARY_PHONE != "") echo $headerLoc->getText("headerLibraryPhone");
-                                if (OBIB_LIBRARY_PHONE != "") echo H(OBIB_LIBRARY_PHONE);?></font>
-                        </div>
-                </div>
-                <div class="title">
-                <?php
-                    if (OBIB_LIBRARY_IMAGE_URL != "") {
-                        echo '<div id="logo"><a href="' . H(OBIB_OPAC_URL) . '" rel="noopener noreferrer"><img id="imglogo" src="' . H(OBIB_LIBRARY_IMAGE_URL) . '" border="0"></a></div>';
-                    }
-                    if (! OBIB_LIBRARY_USE_IMAGE_ONLY) {
-                        echo '<div id="headertitle"> ' . OBIB_LIBRARY_NAME . '</div>';
-                    }
-                 ?>
-                 </div>
-            </div>
-
-    <!-- **************************************************************************************
-     * Tabs - Top-Navigation
-     **************************************************************************************-->
-            <div class="navigationTop">
-                <?php   if ($tab == "home") { ?>
-                            <div class="tab1 tabnew"> <?php echo $headerLoc->getText("headerHome"); ?></div>
-                <?php } else { ?>
-                            <div class="tab2 tabnew"><a
-                                    href="../home/index.php" class="tab"><?php echo $headerLoc->getText("headerHome"); ?></a>
-                            </div>
-                <?php } ?>
-
-                <?php if ($tab == "circulation") { ?>
-                        <div class="tab1 tabnew"> <?php echo $headerLoc->getText("headerCirculation"); ?></div>
-                <?php } else { ?>
-                            <div class="tab2 tabnew"><a
-                                    href="../circ/index.php" class="tab"><?php echo $headerLoc->getText("headerCirculation"); ?></a>
-                            </div>
-                <?php } ?>
-
-                <?php if ($tab == "cataloging") { ?>
-                            <div class="tab1 tabnew"> <?php echo $headerLoc->getText("headerCataloging"); ?></div>
-                <?php } else { ?>
-                            <div class="tab2 tabnew"><a
-                                    href="../catalog/index.php" class="tab"><?php echo $headerLoc->getText("headerCataloging"); ?></a>
-                            </div>
-                <?php } ?>
-
-                <?php if ($tab == "admin") { ?>
-                            <div class="tab1 tabnew"> <?php echo $headerLoc->getText("headerAdmin"); ?></div>
-                <?php } else { ?>
-                            <div class="tab2 tabnew"><a
-                                    href="../admin/index.php" class="tab"><?php echo $headerLoc->getText("headerAdmin"); ?></a>
-                            </div>
-                <?php } ?>
-
-                <?php if ($tab == "reports") { ?>
-                            <div class="tab1 tabnew"> <?php echo $headerLoc->getText("headerReports"); ?></div>
-                <?php } else { ?>
-                            <div class="tab2 tabnew"><a
-                                    href="../reports/index.php" class="tab"><?php echo $headerLoc->getText("headerReports"); ?></a>
-                            </div>
-                <?php } ?>
-            </div>
-    	</div>

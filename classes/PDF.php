@@ -50,7 +50,6 @@ class PDF
     var $creator; //creator
     var $PDFVersion; //PDF version number
 
-    //Changes PVD(8.0.x)
     var $fontName; //PDF font name
 
     /*******************************************************************************
@@ -58,7 +57,6 @@ class PDF
      *                               Public methods                                 *
      *                                                                              *
      *******************************************************************************/
-    //Changes PVD(8.0.x)
     function __construct($format, $orientation)
     {
         $unit = 'pt';
@@ -161,7 +159,6 @@ class PDF
         $w = 0;
         $l = strlen($s);
         for ($i = 0; $i < $l; $i++) {
-            //Changes PVD(8.0.x)
             $w += $cw[$s[$i]];
         }
         # array(x-min, y-min, x-max, y-max) -- LOWER-LEFT ORIGIN
@@ -689,7 +686,6 @@ class PDF
     {
         $filter = ($this->compress) ? '/Filter /FlateDecode ' : '';
         reset($this->images);
-        //Changes PVD(8.0.x)
         //while (list($file, $info) = each($this->images)) {
         //this line is update to this
         foreach ($this->images as $file => $info) {
@@ -765,7 +761,6 @@ class PDF
 
     function _putinfo()
     {
-        //Changes PVD(8.0.x)
         //added because it was never defined
         define("FPDF_VERSION", "v1.86");
         $this->_out('/Producer ' . $this->_textstring('FPDF ' . FPDF_VERSION));

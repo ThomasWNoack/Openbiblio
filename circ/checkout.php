@@ -46,7 +46,6 @@ function checkerror($field, $err)
 
 $circQ = new CircQuery;
 if (isset($_POST['date_from']) && isset($_POST['dueDate']) && $_POST['date_from'] == 'override') {
-    //Changes PVD(8.0.x)
     list($dueDate, $err) = (new Date)->read_e($_POST['dueDate']);
     checkerror('dueDate', $err);
     $_SESSION['due_date_override'] = $_POST['dueDate'];
